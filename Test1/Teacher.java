@@ -1,12 +1,14 @@
 package Test1;
 
+import javax.lang.model.element.QualifiedNameable;
+
 public class Teacher extends Employee{
     private String subject;
     private String classes;
     
     Teacher(){
         
-    }
+    }	
 
 public Teacher(String firstName,String lastName,int age,int year,int salary,int hours,String subject,String classes){
 	super(firstName,lastName,age,year,salary,hours);
@@ -84,7 +86,25 @@ public void setHours(int hours) {
 		this.hours=5;
 }
 public void setSubject(String subject) {
-	this.subject=subject;
+	if (subject.toUpperCase().equals("MATHS") ||
+	subject.toUpperCase().equals("CHIMIE") ||
+	subject.toUpperCase().equals("BIOLOGIE")||
+	subject.toUpperCase().equals("ECONOMIE")||
+	subject.toUpperCase().equals("PHYSIQUE")||
+	subject.toUpperCase().equals("ARABE")||
+	subject.toUpperCase().equals("FRANCAIS")||
+	subject.toUpperCase().equals("CIVISME") ||
+	subject.toUpperCase().equals("HISTOIRE") ||
+	subject.toUpperCase().equals("GEOGRAPHIE") ||
+	 subject.toUpperCase().equals("PHILOSOPHIE") || 
+	 subject.toUpperCase().equals("RELIGION")){
+       this.subject=subject;
+	}
+	else {
+		System.out.println("error,invalid subject .. the default value is GEOGRAPHIE");
+		this.subject="GEOGRAPHIE";
+	}
+	
 }
 public void setClasses(String classes) {
 	this.classes=classes;
