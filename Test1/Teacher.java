@@ -1,10 +1,10 @@
 package Test1;
-// testing
+
 
 public class Teacher extends Employee {
 	private String subject;
 	private String classes;
-
+	private String Certificate;
 	Teacher() {
 
 	}
@@ -13,7 +13,7 @@ public class Teacher extends Employee {
 		super(firstName, lastName, age, year);
 	}
 
-	public Teacher(String firstName, String lastName, int age, int year, int hours, String subject, String classes) {
+	public Teacher(String firstName, String lastName, int age, int year, int hours, String subject, String classes,String Certificate) {
 		super(firstName, lastName, age, year, hours);
 		int id = (int) (Math.random() * 10000 + 8999);
 		this.id = id;
@@ -43,11 +43,13 @@ public class Teacher extends Employee {
 	}
 
 	public int getsalary() {
-		if (this.year > 2012) {
+		if (this.year > 2012 ) {
 			return this.salaryPH * this.hours;
 		} else {
 			return this.salaryPHP * this.hours;
 		}
+		
+
 
 	}
 
@@ -62,6 +64,18 @@ public class Teacher extends Employee {
 	public String getClasses() {
 		return this.classes;
 	}
+	public void setCertificate (String Certificate){
+		if (Certificate.toUpperCase().equals("phd") || Certificate.toUpperCase().equals("bachelor") || Certificate.toUpperCase().equals("master") || Certificate
+				.toUpperCase().equals("others")){
+					this.Certificate = Certificate;
+		}
+		else {
+			System.out.println("error, invalid error the default option is others");
+			
+		}
+		this.Certificate = "others";
+	}
+	
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -120,7 +134,7 @@ public class Teacher extends Employee {
 	}
 
 	public String toString() {
-		return super.toString() + " subject:" + this.subject + " class:" + this.classes;
+		return super.toString() + " subject:" + this.subject + " class:" + this.classes + "certificate" + this.Certificate;
 	}
 
 }

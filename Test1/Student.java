@@ -1,8 +1,9 @@
 package Test1;
 
-
 public class Student extends Person {
 	protected float gpa;
+	public String stInBus;
+	public int numOfStInBus = 0;
 
 	Student() {
 
@@ -12,10 +13,14 @@ public class Student extends Person {
 		super(firstName, lastName, age, year);
 	}
 
-	Student(String firstName, String lastName, int age, int year, float gpa) {
+	Student(String firstName, String lastName, int age, int year, float gpa, String stInBus) {
 
 		super(firstName, lastName, age, year);
 		this.gpa = gpa;
+
+		if (stInBus == "y" || stInBus == "Y") {
+			numOfStInBus++;
+		}
 
 	}
 
@@ -69,6 +74,10 @@ public class Student extends Person {
 	}
 
 	public String toString() {
-		return super.toStirng() + " gpa:" + this.gpa;
+		String result = super.toString();
+		result += " gpa:" + this.gpa;
+		if (this.stInBus == "y" || this.stInBus == "Y")
+			result += "\n this Student is in the bus";
+		return result;
 	}
 }
