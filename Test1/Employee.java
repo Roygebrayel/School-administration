@@ -1,30 +1,39 @@
 package Test1;
+
 import java.text.NumberFormat;
 
-public class Employee extends Person {
-protected int salary;
-protected int hours;
-public Employee() {
-	
-}
-NumberFormat fmt=NumberFormat.getCurrencyInstance();
+public abstract class Employee extends Person {
+	public final int salaryPH = 75;
+	public final int salaryPHP = 100;
+	protected int hours;
 
-public Employee(String firstName,String lastName,int age,int year) {
-	super(firstName,lastName,age,year);
-}
+	public Employee() {
 
-public Employee(String firstName,String lastName,int age,int year,int salary,int hours) {
-super(firstName,lastName,age,year);
-if(salary>=600||salary<=10000)
-	this.salary=salary;
-else
-	this.salary=600;
-if(hours>=1||hours<=30)
-	this.hours=hours;
-else
-	this.hours=5;
+	}
+
+	NumberFormat fmt = NumberFormat.getCurrencyInstance();
+
+	public Employee(String firstName, String lastName, int age, int year) {
+		super(firstName, lastName, age, year);
+	}
+
+	public Employee(String firstName, String lastName, int age, int year, int hours) {
+		super(firstName, lastName, age, year);
+
+		if (hours >= 1 || hours <= 40)
+			this.hours = hours;
+		else
+			this.hours = 5;
+	}
+
+	public String toString() {
+		String result = super.toStirng();
+		if (this.year > 2012) {
+			result += " salary: " + fmt.format(this.salaryPH * hours) + " working hours: " + this.hours;
+		} else
+			result += " salary: " + fmt.format(this.salaryPHP * hours) + " working hours: " + this.hours;
+
+		return result;
+	}
+
 }
-public String toString() {
-	return super.toStirng()+" salary: "+fmt.format(this.salary)+" working hours: "+this.hours;
-}
-		}
