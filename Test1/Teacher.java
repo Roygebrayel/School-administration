@@ -1,6 +1,6 @@
 package Test1;
 
-import javax.lang.model.element.QualifiedNameable;
+
 
 public class Teacher extends Employee{
     private String subject;
