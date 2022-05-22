@@ -87,6 +87,7 @@ public class Main {
 
                             System.out.println("enter age of student: ");
                             stInBus = input.nextLine();
+                            
 
                             
 
