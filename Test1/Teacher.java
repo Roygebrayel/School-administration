@@ -1,10 +1,9 @@
 package Test1;
 
-
 public class Teacher extends Employee {
 	private String subject;
 	private String classes;
-	private String Certificate;
+
 	Teacher() {
 
 	}
@@ -13,7 +12,7 @@ public class Teacher extends Employee {
 		super(firstName, lastName, age, year);
 	}
 
-	public Teacher(String firstName, String lastName, int age, int year, int hours, String subject, String classes,String Certificate) {
+	public Teacher(String firstName, String lastName, int age, int year, int hours, String subject, String classes) {
 		super(firstName, lastName, age, year, hours);
 		int id = (int) (Math.random() * 10000 + 8999);
 		this.id = id;
@@ -43,13 +42,11 @@ public class Teacher extends Employee {
 	}
 
 	public int getsalary() {
-		if (this.year > 2012 ) {
+		if (this.year > 2012) {
 			return this.salaryPH * this.hours;
 		} else {
 			return this.salaryPHP * this.hours;
 		}
-		
-
 
 	}
 
@@ -58,24 +55,14 @@ public class Teacher extends Employee {
 	}
 
 	public String getSubject() {
+
 		return this.subject;
+
 	}
 
 	public String getClasses() {
 		return this.classes;
 	}
-	public void setCertificate (String Certificate){
-		if (Certificate.toUpperCase().equals("phd") || Certificate.toUpperCase().equals("bachelor") || Certificate.toUpperCase().equals("master") || Certificate
-				.toUpperCase().equals("others")){
-					this.Certificate = Certificate;
-		}
-		else {
-			System.out.println("error, invalid error the default option is others");
-			
-		}
-		this.Certificate = "others";
-	}
-	
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -90,8 +77,8 @@ public class Teacher extends Employee {
 	}
 
 	public void setAge(int age) {
-		if (age < 13 || age > 22) {
-			System.out.println("Error!! age should be greater or equal to 13 and less then 22!");
+		if (age < 18 || age > 64) {
+			System.out.println("Error!! age should be greater or equal to 18 and less then 64!");
 
 		} else
 			this.age = age;
@@ -106,10 +93,12 @@ public class Teacher extends Employee {
 	}
 
 	public void setHours(int hours) {
-		if (hours >= 1 || hours <= 30)
+		if (hours > 0 || hours <= 40) {
 			this.hours = hours;
-		else
+		} else {
+			System.out.println("invalid hours default 5");
 			this.hours = 5;
+		}
 	}
 
 	public void setSubject(String subject) {
@@ -134,7 +123,7 @@ public class Teacher extends Employee {
 	}
 
 	public String toString() {
-		return super.toString() + " subject:" + this.subject + " class:" + this.classes + "certificate" + this.Certificate;
+		return super.toString() + " subject:" + this.subject + " class:" + this.classes;
 	}
 
 }

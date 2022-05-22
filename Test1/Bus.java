@@ -1,8 +1,10 @@
 package Test1;
+
 import java.util.Scanner;
+
 public class Bus {
     private Student[] all_Students;
-
+    private String inbus;
     private int nbOfStudent = 0;
     Scanner input = new Scanner(System.in);
 
@@ -18,14 +20,14 @@ public class Bus {
         this.all_Students = st;
     }
 
-    public void addStToBus(String fname, String lname, int age, int year) {
+    public void addStToBus(String fname, String lname, int age, int year, String inbus, String classs) {
         System.out.println("to register in the bus you should pay 200$");
         if (nbOfStudent < 50) {
             System.out.println("are you sure?(y/n)");
             String sure = input.next();
             if (sure.equals("y") || sure.equals("Y")) {
 
-                all_Students[nbOfStudent] = new Student(fname, lname, age, year);
+                all_Students[nbOfStudent] = new Student(fname, lname, age, year, inbus, classs);
                 nbOfStudent++;
                 System.out.println("New student added successfully!\n");
             } else {

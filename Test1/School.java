@@ -5,6 +5,10 @@ public class School {
     private String address;
     private Class[] all_classes;
 
+    public School() {
+
+    }
+
     public School(String sc_name, String address, Class[] all_classes) {
         name = sc_name;
         this.address = address;
