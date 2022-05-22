@@ -1,5 +1,5 @@
 package Test1;
-
+// creating the bus class
 import java.util.Scanner;
 
 public class Bus {
