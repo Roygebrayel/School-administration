@@ -10,7 +10,7 @@ public class Main {
         int choice=0,year,age;
         String firstName,lastName,stInBus;
         double gpa;
-       Person [] ss = new Person [100];
+       
         
 		
         do{
@@ -88,7 +88,9 @@ public class Main {
                             System.out.println("enter age of student: ");
                             stInBus = input.nextLine();
 
-                            // Student = new Student ();
+                            
+
+                            
                             
 							
                     break;
