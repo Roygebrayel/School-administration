@@ -1,7 +1,5 @@
 package Test1;
 
-import java.awt.Component;
-
 public abstract class Person {
 
     protected String firstName;

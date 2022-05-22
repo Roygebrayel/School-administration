@@ -1,6 +1,6 @@
 package Test1;
 
-public class Teacher extends Employee {
+public class Teacher extends Employee{
 	private String subject;
 	private String classes;
 

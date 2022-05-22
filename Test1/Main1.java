@@ -1,18 +1,21 @@
 
-
 package Test1;
 
 import java.util.Scanner;
-
+import java.util.concurrent.TimeUnit;
+import java.text.NumberFormat;
+import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
-import java.io.PrintWriter; 
+import java.io.PrintWriter;
 import java.io.IOException;
-import java.io.FileWriter;
 
 public class Main1 {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
+
+        NumberFormat fmt = NumberFormat.getCurrencyInstance();
+        int fees = 200;
         Scanner input = new Scanner(System.in);
         int choice = 0, year, age, nbOfStudents = 0, nbOfTeachers = 0;
         String firstName, lastName, stInBus;
@@ -20,8 +23,12 @@ public class Main1 {
         Teacher[] t = new Teacher[100];
         Class c1[] = new Class[100];
         School sc = new School();
-        
         int admps = 0000;
+        
+
+        
+        System.out.println("welcome to the administration school system");
+        TimeUnit.MICROSECONDS.sleep(2000000);
 
         do {
             System.out.printf(
@@ -30,8 +37,7 @@ public class Main1 {
                             + "3- Classes\n"
                             + "4- School\n"
                             + "5- Bus\n"
-                            + "6-program\n"
-                            + "7- Exit\n");
+                            + "6- Exit\n");
 
             System.out.println("Enter a choice: ");
             choice = input.nextInt();
@@ -54,8 +60,9 @@ public class Main1 {
                                         + "8- get gpa \n"
                                         + "9- delete a student \n"
                                         + "10-search a student by name\n"
-                                        + "11- throw all informations into an external file"
-                                        + "12- exit\n");
+                                        + "11- throw all informational into an external file\n"
+                                        + "12- throw all informations into an external panel\n"
+                                        + "13- exit\n");
 
                         System.out.println("request what to do with the student :");
                         choice_student = input.nextInt();
@@ -72,11 +79,15 @@ public class Main1 {
                                 firstName = input.nextLine();
                                 System.out.println("Enter student last name");
                                 lastName = input.nextLine();
-                                System.out.println("Enter student age");
-                                age = input.nextInt();
-                                System.out.println("Enter the year of start");
-                                year = input.nextInt();
-                                input.nextLine();
+                                do {
+                                    System.out.println("Enter student age");
+                                    age = input.nextInt();
+                                } while (age < 13 || age > 23);
+                                do {
+                                    System.out.println("Enter the year of start");
+                                    year = input.nextInt();
+                                    input.nextLine();
+                                } while (year < 2003 || year >= 2022);
                                 System.out.println("student in bus?(y/n)");
 
                                 stInBus = input.nextLine();
@@ -324,39 +335,36 @@ public class Main1 {
                                 }
                                 break;
                                 case 11:
-                               
-                               
-                                    // Open the file
-                                    
-                                   
-                                    
-                                    PrintWriter out = new PrintWriter("student.txt");
+                                System.out.println("extracting informations into an external text file");
+                                 PrintWriter out = new PrintWriter("student.txt");
                                     
 
                                     // Append  the file
                                     for (int i=0; i<nbOfStudents; i++){
                                         
-                                        out.println(st[i].toStirng());
-            
+                                        out.println(st[i].toString());
+                                    }
+                                    out.close();
+                                    break;
+                                    case 12:
+                                    for (int i=0; i<nbOfStudents; i++){
                                         JFrame f = new JFrame();
 
-                                        JTextArea area = new JTextArea(st[i].toStirng());
+                                        JTextArea area = new JTextArea(st[i].toString());
 
                                         area.setBounds(60, 60, 500, 500);
-                                
+
                                         f.add(area);
                                         f.setSize(600, 600);
                                         f.setLayout(null);
                                         f.setVisible(true);
+
                                     }
-                                    // Close the file.
-
-                                     out.close();
-
-                                    
-                                   
-                            case 12:
+                                    break;
+                                        
+                            case 13:
                                 System.out.println("exiting!!");
+                                TimeUnit.MICROSECONDS.sleep(2000000);
                                 break;
 
                             default:
@@ -364,7 +372,7 @@ public class Main1 {
                                 break;
                         }
 
-                    } while (choice_student != 12);
+                    } while (choice_student != 13);
                     break;
                 case 2:
 
@@ -383,7 +391,9 @@ public class Main1 {
                                         + "8- get salary \n"
                                         + "9- delete a teacher \n"
                                         + "10-search a teacher by name\n"
-                                        + "11- exit\n");
+                                        + "11-throw all information into an external file\n"
+                                        + "12-throw all information into an external panel\n"
+                                        + "13- exit\n");
 
                         System.out.println("request what to do with the teacher :");
                         choice_teacher = input.nextInt();
@@ -425,7 +435,7 @@ public class Main1 {
                                         subject.toUpperCase().equals("GEOGRAPHIE") ||
                                         subject.toUpperCase().equals("PHILOSOPHIE") ||
                                         subject.toUpperCase().equals("RELIGION")) {
-                                    System.out.println("subject creacted");
+                                    
                                 } else {
                                     System.out.println("invalid subject!!default Maths");
                                     subject = "MATH";
@@ -433,7 +443,7 @@ public class Main1 {
                                 }
                                 String[] levelchoose = { "S1G", "S2S", "S2H", "SV", "SG", "SE", "LH" };
                                 String level1 = "w";
-                                System.out.println("enter the level of teaching");
+                                System.out.println("enter the class of teaching");
                                 String level = input.nextLine();
                                 for (int i = 0; i < levelchoose.length; i++) {
                                     if (level.toUpperCase().equals(levelchoose[i])) {
@@ -659,16 +669,41 @@ public class Main1 {
 
                                 }
                                 break;
-                            case 11:
+                                case 11:
+                                PrintWriter pw = new PrintWriter("teacher.txt");
+                                for (int i=0;i<nbOfTeachers;i++){
+                                    pw.println(t[i].toString());
+                                }
+                                pw.close();
+
+                            
+                                case 12:
+                                 for (int i=0; i<nbOfTeachers; i++){
+                                        JFrame f = new JFrame();
+
+                                        JTextArea area = new JTextArea(t[i].toString());
+
+                                        area.setBounds(60, 60, 1000, 1000);
+
+                                        f.add(area);
+                                        f.setSize(1000, 1000);
+                                        f.setLayout(null);
+                                        f.setVisible(true);
+                                 }
+
+
+                                break;
+                                case 13:
                                 System.out.println("exiting!!");
+                                TimeUnit.MICROSECONDS.sleep(2000000);
                                 break;
 
-                            default:
+                               default:
                                 System.out.println("INVALID OPTION!!");
                                 break;
                         }
 
-                    } while (choice_teacher != 11);
+                    } while (choice_teacher != 13);
                     break;
                 case 3:
                     int class_choice = 0;
@@ -678,7 +713,9 @@ public class Main1 {
                                 "1- display all information about a class \n"
                                         + "2- get number of student in a class  \n"
                                         + "3-search a class by name\n"
-                                        + "4- exit\n");
+                                        + "4-display the progam\n"
+                                        + "5- exit\n");
+
                         System.out.println("choose what to do");
                         class_choice = input.nextInt();
                         input.nextLine();
@@ -698,6 +735,7 @@ public class Main1 {
                                             System.out.println(st[i]);
 
                                         }
+
                                     }
 
                                 } else {
@@ -748,14 +786,495 @@ public class Main1 {
 
                                 break;
                             case 4:
+                                System.out.println("enter your choice(S1-S2S-S2H-SV-SE-SG)");
+                                String choiceProg = input.nextLine();
+                                if (choiceProg.toUpperCase().equals("S1".toUpperCase())) {
+                                    System.out.printf("%50s ", "S1 \n ");
+                                    System.out.printf("%1s ",
+                                            "----------------------------------------------------------"
+                                                    + "--------------------------------------------------------- \n ");
+                                    System.out.printf("%15s ", "Moday ");
+                                    System.out.printf("%15s ", "Tuesday");
+                                    System.out.printf("%15s ", "Wednesday ");
+                                    System.out.printf("%15s ", "Thursday");
+                                    System.out.printf("%15s ", "Friday ");
+                                    System.out.printf("%15s ", "Saturday");
+                                    System.out.printf("%15s ", "Sunday \n");
+
+                                    System.out.printf("%15s ", "BIOLOGIE");
+                                    System.out.printf("%15s ", "CHIMIE");
+                                    System.out.printf("%15s ", "ECONOMIE");
+                                    System.out.printf("%15s ", "PHYSIQUE");
+                                    System.out.printf("%15s ", "ARABE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "BIOLOGIE");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "CIVISME");
+                                    System.out.printf("%15s ", "RELIGION");
+                                    System.out.printf("%15s ", "GEOGRAPHIE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "HISTOIRE");
+                                    System.out.printf("%15s ", "CHIMIE");
+                                    System.out.printf("%15s ", "PHYSIQUE");
+                                    System.out.printf("%15s ", "ARABE");
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "GEOGRAPHIE");
+                                    System.out.printf("%15s ", "ECONOMIE");
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "CHIMIE");
+                                    System.out.printf("%15s ", "RELIGION");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "ARABE");
+                                    System.out.printf("%15s ", "ARABE");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "BIOLOGIE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                } else if (choiceProg.toLowerCase().equals("S2S".toLowerCase())) {
+                                    System.out.printf("%50s ", "S2S \n ");
+                                    System.out.printf("%1s ",
+                                            "----------------------------------------------------------"
+                                                    + "--------------------------------------------------------- \n ");
+                                    System.out.printf("%15s ", "Moday ");
+                                    System.out.printf("%15s ", "Tuesday");
+                                    System.out.printf("%15s ", "Wednesday ");
+                                    System.out.printf("%15s ", "Thursday");
+                                    System.out.printf("%15s ", "Friday ");
+                                    System.out.printf("%15s ", "Saturday");
+                                    System.out.printf("%15s ", "Sunday \n");
+
+                                    System.out.printf("%15s ", "BIOLOGIE");
+                                    System.out.printf("%15s ", "CHIMIE");
+                                    System.out.printf("%15s ", "ECONOMIE");
+                                    System.out.printf("%15s ", "PHYSIQUE");
+                                    System.out.printf("%15s ", "ARABE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "PHILOSOPHIE");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "CIVISME");
+                                    System.out.printf("%15s ", "RELIGION");
+                                    System.out.printf("%15s ", "GEOGRAPHIE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "HISTOIRE");
+                                    System.out.printf("%15s ", "CHIMIE");
+                                    System.out.printf("%15s ", "PHYSIQUE");
+                                    System.out.printf("%15s ", "ARABE");
+                                    System.out.printf("%15s ", "PHILOSOPHIE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "GEOGRAPHIE");
+                                    System.out.printf("%15s ", "ECONOMIE");
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "CHIMIE");
+                                    System.out.printf("%15s ", "RELIGION");
+                                    System.out.printf("%15s ", "PHILOSOPHIE");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "ARABE");
+                                    System.out.printf("%15s ", "ARABE");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "BIOLOGIE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                } else if (choiceProg.toLowerCase().equals("S2H".toLowerCase())) {
+                                    System.out.printf("%50s ", "S2H \n ");
+                                    System.out.printf("%1s ",
+                                            "----------------------------------------------------------"
+                                                    + "--------------------------------------------------------- \n ");
+                                    System.out.printf("%15s ", "Moday ");
+                                    System.out.printf("%15s ", "Tuesday");
+                                    System.out.printf("%15s ", "Wednesday ");
+                                    System.out.printf("%15s ", "Thursday");
+                                    System.out.printf("%15s ", "Friday ");
+                                    System.out.printf("%15s ", "Saturday");
+                                    System.out.printf("%15s ", "Sunday \n");
+
+                                    System.out.printf("%15s ", "ECONOMIE");
+                                    System.out.printf("%15s ", "CHIMIE");
+                                    System.out.printf("%15s ", "ECONOMIE");
+                                    System.out.printf("%15s ", "PHYSIQUE");
+                                    System.out.printf("%15s ", "ARABE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "PHILOSOPHIE");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "CIVISME");
+                                    System.out.printf("%15s ", "RELIGION");
+                                    System.out.printf("%15s ", "GEOGRAPHIE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "HISTOIRE");
+                                    System.out.printf("%15s ", "CHIMIE");
+                                    System.out.printf("%15s ", "PHYSIQUE");
+                                    System.out.printf("%15s ", "ARABE");
+                                    System.out.printf("%15s ", "PHILOSOPHIE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "GEOGRAPHIE");
+                                    System.out.printf("%15s ", "ECONOMIE");
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "CHIMIE");
+                                    System.out.printf("%15s ", "RELIGION");
+                                    System.out.printf("%15s ", "PHILOSOPHIE");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "ECONOMIE");
+                                    System.out.printf("%15s ", "ARABE");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "BIOLOGIE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                } else if (choiceProg.toLowerCase().equals("SV".toLowerCase())) {
+                                    System.out.printf("%50s ", "SV \n ");
+                                    System.out.printf("%1s ",
+                                            "----------------------------------------------------------"
+                                                    + "--------------------------------------------------------- \n ");
+                                    System.out.printf("%15s ", "Moday ");
+                                    System.out.printf("%15s ", "Tuesday");
+                                    System.out.printf("%15s ", "Wednesday ");
+                                    System.out.printf("%15s ", "Thursday");
+                                    System.out.printf("%15s ", "Friday ");
+                                    System.out.printf("%15s ", "Saturday");
+                                    System.out.printf("%15s ", "Sunday \n");
+
+                                    System.out.printf("%15s ", "BIOLOGIE");
+                                    System.out.printf("%15s ", "CHIMIE");
+                                    System.out.printf("%15s ", "BIOLOGIE");
+                                    System.out.printf("%15s ", "PHYSIQUE");
+                                    System.out.printf("%15s ", "ARABE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "PHILOSOPHIE");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "CIVISME");
+                                    System.out.printf("%15s ", "RELIGION");
+                                    System.out.printf("%15s ", "GEOGRAPHIE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "HISTOIRE");
+                                    System.out.printf("%15s ", "CHIMIE");
+                                    System.out.printf("%15s ", "PHYSIQUE");
+                                    System.out.printf("%15s ", "ARABE");
+                                    System.out.printf("%15s ", "PHILOSOPHIE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "GEOGRAPHIE");
+                                    System.out.printf("%15s ", "BIOLOGIE");
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "CHIMIE");
+                                    System.out.printf("%15s ", "RELIGION");
+                                    System.out.printf("%15s ", "PHILOSOPHIE");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "BIOLOGIE");
+                                    System.out.printf("%15s ", "ARABE");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "BIOLOGIE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                } else if (choiceProg.toLowerCase().equals("SG".toLowerCase())) {
+                                    System.out.printf("%50s ", "SG \n ");
+                                    System.out.printf("%1s ",
+                                            "----------------------------------------------------------"
+                                                    + "--------------------------------------------------------- \n ");
+                                    System.out.printf("%15s ", "Moday ");
+                                    System.out.printf("%15s ", "Tuesday");
+                                    System.out.printf("%15s ", "Wednesday ");
+                                    System.out.printf("%15s ", "Thursday");
+                                    System.out.printf("%15s ", "Friday ");
+                                    System.out.printf("%15s ", "Saturday");
+                                    System.out.printf("%15s ", "Sunday \n");
+
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "CHIMIE");
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "PHYSIQUE");
+                                    System.out.printf("%15s ", "ARABE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "PHILOSOPHIE");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "CIVISME");
+                                    System.out.printf("%15s ", "RELIGION");
+                                    System.out.printf("%15s ", "GEOGRAPHIE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "HISTOIRE");
+                                    System.out.printf("%15s ", "CHIMIE");
+                                    System.out.printf("%15s ", "PHYSIQUE");
+                                    System.out.printf("%15s ", "ARABE");
+                                    System.out.printf("%15s ", "PHILOSOPHIE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "GEOGRAPHIE");
+                                    System.out.printf("%15s ", "PHYSIQUE");
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "CHIMIE");
+                                    System.out.printf("%15s ", "RELIGION");
+                                    System.out.printf("%15s ", "PHILOSOPHIE");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "PHYSIQUE");
+                                    System.out.printf("%15s ", "ARABE");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                } else if (choiceProg.toLowerCase().equals("SE".toLowerCase())) {
+                                    System.out.printf("%50s ", "SE \n ");
+                                    System.out.printf("%1s ",
+                                            "----------------------------------------------------------"
+                                                    + "--------------------------------------------------------- \n ");
+                                    System.out.printf("%15s ", "Moday ");
+                                    System.out.printf("%15s ", "Tuesday");
+                                    System.out.printf("%15s ", "Wednesday ");
+                                    System.out.printf("%15s ", "Thursday");
+                                    System.out.printf("%15s ", "Friday ");
+                                    System.out.printf("%15s ", "Saturday");
+                                    System.out.printf("%15s ", "Sunday \n");
+
+                                    System.out.printf("%15s ", "ECONOMIE");
+                                    System.out.printf("%15s ", "CHIMIE");
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "PHYSIQUE");
+                                    System.out.printf("%15s ", "ARABE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "PHILOSOPHIE");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "CIVISME");
+                                    System.out.printf("%15s ", "RELIGION");
+                                    System.out.printf("%15s ", "GEOGRAPHIE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "HISTOIRE");
+                                    System.out.printf("%15s ", "CHIMIE");
+                                    System.out.printf("%15s ", "PHYSIQUE");
+                                    System.out.printf("%15s ", "ARABE");
+                                    System.out.printf("%15s ", "ECONOMIE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "GEOGRAPHIE");
+                                    System.out.printf("%15s ", "PHYSIQUE");
+                                    System.out.printf("%15s ", "ECONOMIE");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "CHIMIE");
+                                    System.out.printf("%15s ", "RELIGION");
+                                    System.out.printf("%15s ", "PHILOSOPHIE");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                    System.out.printf("%15s ", "MATHS");
+                                    System.out.printf("%15s ", "PHYSIQUE");
+                                    System.out.printf("%15s ", "ARABE");
+                                    System.out.printf("%15s ", "FRANCAIS");
+                                    System.out.printf("%15s ", "ECONOMIE");
+                                    System.out.printf("%15s ", "null");
+                                    System.out.printf("%15s ", "null \n");
+
+                                } else
+                                    System.out.println("Error!! your choice should be (S1-S2S-S2H-SV-SE-SG)");
+                                break;
+                                
+                                    
+                            case 5:
                                 System.out.println("exiting");
+                                TimeUnit.MICROSECONDS.sleep(2000000);
 
                                 break;
                         }
 
-                    } while (class_choice != 4);
+                    } while (class_choice != 5);
+                case 4:
+                    int school_choice = 0;
+                    do {
+                        System.out.println("1-set school name\n"
+                                + "2-get school name\n"
+                                + "3-set school address\n"
+                                + "4 get school address\n"
+                                + "5-get school classes\n"
+                                + "6- throw all information into an external file\n"
+                                + "7- throw all information into an external panel\n"
+                                + "8-exit\n");
+                        System.out.println("choose what to do");
+                        school_choice = input.nextInt();
+                        input.nextLine();
+                        switch (school_choice) {
+                            case 1:
+                                System.out.println("enter school's name: ");
+                                String scname = input.nextLine();
+
+                                sc.setName(scname);
+                                break;
+                            case 2:
+                                System.out.println("school's name: " + sc.getName());
+                                break;
+                            case 3:
+                                System.out.println("enter the address");
+                                String add = input.nextLine();
+                                sc.setAddress(add);
+                                break;
+                            case 4:
+                                System.out.println("school's address: " + sc.getAddress());
+                                break;
+                            case 5:
+                                System.out.println("school's classes:\n");
+                                sc.getAllClasses();
+                                break;
+                                case 6:
+                                PrintWriter out = new PrintWriter("school.txt");
+
+                                out.println(sc.toString());
+                                out.close();
+                                break;
+                                case 7:
+                                 JFrame f = new JFrame();
+
+                                        JTextArea area = new JTextArea(sc.toString());
+
+                                        area.setBounds(60, 60, 1000, 1000);
+
+                                        f.add(area);
+                                        f.setSize(1000, 1000);
+                                        f.setLayout(null);
+                                        f.setVisible(true);
+                                        break;
+                            case 8:
+                                System.out.println("Exiting...");
+                                break;
+
+                            default:
+                                System.out.println("error!!");
+                        }
+
+                    } while (school_choice != 8);
+                    break;
+                case 5:
+
+                    int bus_choice = 0;
+                    do {
+                        System.out.printf(
+                                "1- show students in the bus \n"
+                                        + "2-show bus fees\n"
+                                        + "3-exit\n");
+                        System.out.println("enter your choice:");
+                        bus_choice = input.nextInt();
+                        switch (bus_choice) {
+                            case 1:
+                                System.out.println("students in the bus: ");
+                                for (int i = 0; i < nbOfStudents; i++) {
+                                    if (st[i].stInBus.toLowerCase().equals("y")) {
+                                        System.out.println(st[i]);
+                                    }
+                                }
+                                break;
+                            case 2:
+                                System.out.println("bus fees: " + fmt.format(fees));
+                                break;
+                            case 3:
+                                System.out.println("exiting...");
+                                TimeUnit.MICROSECONDS.sleep(2000000);
+                                break;
+
+                            default:
+                                System.out.println("INVALID OPTION!!!");
+                                break;
+                        }
+                    } while (bus_choice != 3);
+                    break;
+
+                case 6:
+                    System.out.println("exiting...");
+                    TimeUnit.MICROSECONDS.sleep(2000000);
+
+                    break;
+                default:
+                    System.out.println("invalid option!!");
 
             }
+
         } while (choice != 6);
 
     }

@@ -4,6 +4,7 @@ public class School {
     private String name;
     private String address;
     private Class[] all_classes;
+    private String[] classes = { "S1G", "S2S", "S2H", "SV", "SG", "SE", "LH" };
 
     public School() {
 
@@ -60,15 +61,15 @@ public class School {
         }
     }
 
-    public Class[] getAllClasses() {
-        return this.all_classes;
+    public void getAllClasses() {
+        for (int i = 0; i < this.classes.length; i++) {
+            System.out.println(this.classes[i]);
+        }
     }
 
     public String toString() {
         String result = "School " + this.name
-                + " at " + this.address + "\nList of classes\n";
-        for (Class cl : this.all_classes)
-            result += cl.toString();
+                + " at " + this.address;
         return result;
     }
 
