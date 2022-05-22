@@ -3,19 +3,12 @@
 package Test1;
 
 import java.util.Scanner;
+
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
 import java.io.PrintWriter; 
 import java.io.IOException;
 import java.io.FileWriter;
-
-
-
-
-        
-    
-
-  
-        
-
 
 public class Main1 {
 
@@ -335,18 +328,26 @@ public class Main1 {
                                
                                     // Open the file
                                     
-                                    // Open the file in append mode.
-                                    FileWriter fw = new FileWriter("student.txt", true);
-                                    PrintWriter out = new PrintWriter(fw);
+                                   
+                                    
+                                    PrintWriter out = new PrintWriter("student.txt");
                                     
 
                                     // Append  the file
                                     for (int i=0; i<nbOfStudents; i++){
                                         
                                         out.println(st[i].toStirng());
-                                        
-                                        new TextAreaExample();
-                                        
+            
+                                        JFrame f = new JFrame();
+
+                                        JTextArea area = new JTextArea(st[i].toStirng());
+
+                                        area.setBounds(60, 60, 500, 500);
+                                
+                                        f.add(area);
+                                        f.setSize(600, 600);
+                                        f.setLayout(null);
+                                        f.setVisible(true);
                                     }
                                     // Close the file.
 

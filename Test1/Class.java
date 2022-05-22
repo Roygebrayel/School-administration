@@ -2,7 +2,7 @@ package Test1;
 
 import java.util.Scanner;
 
-import java.util.Scanner;
+
 
 public class Class {
     Scanner input = new Scanner(System.in);
