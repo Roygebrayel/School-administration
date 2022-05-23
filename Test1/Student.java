@@ -17,7 +17,15 @@ public class Student extends Person {
 		if (this.stInBus.equals("y") || this.stInBus.equals("Y")) {
 			numOfStInBus++;
 		}
-		this.stClass = stClass;
+		if (stClass.toLowerCase().equals("s1g") || stClass.toLowerCase().equals("s2s")
+				|| stClass.toLowerCase().equals("s2h") || stClass.toLowerCase().equals("sv")
+				|| stClass.toLowerCase().equals("sg") || stClass.toLowerCase().equals("se")
+				|| stClass.toLowerCase().equals("lh")) {
+			this.stClass = stClass;
+		} else {
+			System.out.println("invalid class!!default s1g");
+			this.stClass = "s1g";
+		}
 
 	}
 
@@ -86,12 +94,12 @@ public class Student extends Person {
 			this.gpa = gpa;
 	}
 
-	public String toString() {
-		String result = super.toStirng() + " class: " + this.stClass;
-		if (stInBus.equals("y") || stInBus.equals("Y")) {
-			result += "\nthe student is in bus and should pay 200$";
-		}
-
-		return result;
+public String toString() {
+	String result=super.toStirng()+" class: "+this.stClass;
+	if(stInBus.equals("y")||stInBus.equals("Y")) {
+		result+="\nthe student is in bus and should pay 200$";
 	}
+	
+	  return result;
+}
 }
