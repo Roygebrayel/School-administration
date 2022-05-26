@@ -1,16 +1,14 @@
 
-package Test1;
-
+package project;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.text.NumberFormat;
-import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import java.io.PrintWriter;
 import java.io.IOException;
 
-public class Main1 {
+public class main {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -71,10 +69,7 @@ public class Main1 {
                         switch (choice_student) {
                             case 1:
 
-                                /*
-                                 * System.out.println(" student in bus?(y/n)");
-                                 * stInBus = input.nextLine();
-                                 */
+                              
                                 System.out.println("Enter student first name");
                                 firstName = input.nextLine();
                                 System.out.println("Enter student last name");
@@ -192,7 +187,7 @@ public class Main1 {
                                     input.nextLine();
                                     cn++;
                                     if (cn == 3) {
-                                        System.out.println("invalid password(for 3 times) exiting");
+                                        System.out.println("invalid password(for 3 times) 1 more chance");
                                     }
 
                                 } while (pass != admps && cn <= 3);
@@ -336,15 +331,16 @@ public class Main1 {
                                 break;
                                 case 11:
                                 System.out.println("extracting informations into an external text file");
-                                 PrintWriter out = new PrintWriter("student.txt");
+                                 PrintWriter out = new PrintWriter("student.csv");
                                     
 
-                                    // Append  the file
+                                    //write the file
                                     for (int i=0; i<nbOfStudents; i++){
                                         
                                         out.println(st[i].toString());
                                     }
                                     out.close();
+                                    
                                     break;
                                     case 12:
                                     for (int i=0; i<nbOfStudents; i++){
@@ -388,7 +384,7 @@ public class Main1 {
                                         + "5- set starting year \n"
                                         + "6-set id\n"
                                         + "7- set hours \n"
-                                        + "8- get salary \n"
+                                        + "8- get hours \n"
                                         + "9- delete a teacher \n"
                                         + "10-search a teacher by name\n"
                                         + "11-throw all information into an external file\n"
@@ -670,7 +666,7 @@ public class Main1 {
                                 }
                                 break;
                                 case 11:
-                                PrintWriter pw = new PrintWriter("teacher.txt");
+                                PrintWriter pw = new PrintWriter("teacher.csv");
                                 for (int i=0;i<nbOfTeachers;i++){
                                     pw.println(t[i].toString());
                                 }
@@ -1167,6 +1163,7 @@ public class Main1 {
                         }
 
                     } while (class_choice != 5);
+                    break;
                 case 4:
                     int school_choice = 0;
                     do {
@@ -1204,7 +1201,7 @@ public class Main1 {
                                 sc.getAllClasses();
                                 break;
                                 case 6:
-                                PrintWriter out = new PrintWriter("school.txt");
+                                PrintWriter out = new PrintWriter("school.csv");
 
                                 out.println(sc.toString());
                                 out.close();
@@ -1266,7 +1263,7 @@ public class Main1 {
                     break;
 
                 case 6:
-                    System.out.println("exiting...");
+                    System.out.println("exiting thank you...");
                     TimeUnit.MICROSECONDS.sleep(2000000);
 
                     break;
@@ -1276,6 +1273,6 @@ public class Main1 {
             }
 
         } while (choice != 6);
-
+input.close();
     }
 }

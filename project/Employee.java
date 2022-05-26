@@ -1,6 +1,4 @@
-package Test1;
-// making the abstract class Employee
-
+package project;
 import java.text.NumberFormat;
 
 public abstract class Employee extends Person {
@@ -29,7 +27,7 @@ public abstract class Employee extends Person {
 
 	public String toString() {
 		String result = super.toStirng();
-		if (this.year > 2012) {
+		if (this.year > 2018) {
 			result += " salary: " + fmt.format(this.salaryPH * hours) + " working hours: " + this.hours;
 		} else
 			result += " salary: " + fmt.format(this.salaryPHP * hours) + " working hours: " + this.hours;
