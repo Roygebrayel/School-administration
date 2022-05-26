@@ -1,14 +1,19 @@
 
 package project;
+
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.text.NumberFormat;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import java.io.PrintWriter;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 
-public class main {
+public class Main1 {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -22,9 +27,7 @@ public class main {
         Class c1[] = new Class[100];
         School sc = new School();
         int admps = 0000;
-        
 
-        
         System.out.println("welcome to the administration school system");
         TimeUnit.MICROSECONDS.sleep(2000000);
 
@@ -60,7 +63,8 @@ public class main {
                                         + "10-search a student by name\n"
                                         + "11- throw all informational into an external file\n"
                                         + "12- throw all informations into an external panel\n"
-                                        + "13- exit\n");
+                                        + "13- read all informations from the external file\n"
+                                        + "14- exit\n");
 
                         System.out.println("request what to do with the student :");
                         choice_student = input.nextInt();
@@ -69,7 +73,6 @@ public class main {
                         switch (choice_student) {
                             case 1:
 
-                              
                                 System.out.println("Enter student first name");
                                 firstName = input.nextLine();
                                 System.out.println("Enter student last name");
@@ -329,36 +332,59 @@ public class main {
 
                                 }
                                 break;
-                                case 11:
+                            case 11:
                                 System.out.println("extracting informations into an external text file");
-                                 PrintWriter out = new PrintWriter("student.csv");
+                                PrintWriter out = new PrintWriter("student.csv");
+
+                                // write the file
+                                out.println();
+                                for (int i = 0; i < nbOfStudents; i++) {
                                     
 
-                                    //write the file
-                                    for (int i=0; i<nbOfStudents; i++){
+                                    out.println(st[i].toString());
+                                }
+                                out.close();
+
+                                break;
+                            case 12:
+                                for (int i = 0; i < nbOfStudents; i++) {
+                                    JFrame f = new JFrame();
+
+                                    JTextArea area = new JTextArea(st[i].toString());
+
+                                    area.setBounds(60, 60, 500, 500);
+
+                                    f.add(area);
+                                    f.setSize(600, 600);
+                                    f.setLayout(null);
+                                    f.setVisible(true);
+
+                                }
+                                break;
+
+                                case 13:
+                               
+
+                                    try (BufferedReader br = new BufferedReader(new FileReader("student.csv"))) {
+                                        String line = br.readLine();
                                         
-                                        out.println(st[i].toString());
+                                        while (line != null) {
+                                            
+                                            line = br.readLine();
+                                          System.out.println(line);
+                                        }
+                                         
+                                        
                                     }
-                                    out.close();
+                                     
                                     
-                                    break;
-                                    case 12:
-                                    for (int i=0; i<nbOfStudents; i++){
-                                        JFrame f = new JFrame();
+     
+    
+    break;
 
-                                        JTextArea area = new JTextArea(st[i].toString());
-
-                                        area.setBounds(60, 60, 500, 500);
-
-                                        f.add(area);
-                                        f.setSize(600, 600);
-                                        f.setLayout(null);
-                                        f.setVisible(true);
-
-                                    }
-                                    break;
-                                        
-                            case 13:
+                            
+                                
+                            case 14:
                                 System.out.println("exiting!!");
                                 TimeUnit.MICROSECONDS.sleep(2000000);
                                 break;
@@ -368,7 +394,7 @@ public class main {
                                 break;
                         }
 
-                    } while (choice_student != 13);
+                    } while (choice_student != 14);
                     break;
                 case 2:
 
@@ -389,7 +415,8 @@ public class main {
                                         + "10-search a teacher by name\n"
                                         + "11-throw all information into an external file\n"
                                         + "12-throw all information into an external panel\n"
-                                        + "13- exit\n");
+                                        + "13- read all informations from the external file\n"
+                                        + "14- exit\n");
 
                         System.out.println("request what to do with the teacher :");
                         choice_teacher = input.nextInt();
@@ -431,7 +458,7 @@ public class main {
                                         subject.toUpperCase().equals("GEOGRAPHIE") ||
                                         subject.toUpperCase().equals("PHILOSOPHIE") ||
                                         subject.toUpperCase().equals("RELIGION")) {
-                                    
+
                                 } else {
                                     System.out.println("invalid subject!!default Maths");
                                     subject = "MATH";
@@ -665,41 +692,53 @@ public class main {
 
                                 }
                                 break;
-                                case 11:
+                            case 11:
                                 PrintWriter pw = new PrintWriter("teacher.csv");
-                                for (int i=0;i<nbOfTeachers;i++){
+                                pw.println();
+                                for (int i = 0; i < nbOfTeachers; i++) {
                                     pw.println(t[i].toString());
                                 }
                                 pw.close();
 
-                            
-                                case 12:
-                                 for (int i=0; i<nbOfTeachers; i++){
-                                        JFrame f = new JFrame();
+                            case 12:
+                                for (int i = 0; i < nbOfTeachers; i++) {
+                                    JFrame f = new JFrame();
 
-                                        JTextArea area = new JTextArea(t[i].toString());
+                                    JTextArea area = new JTextArea(t[i].toString());
 
-                                        area.setBounds(60, 60, 1000, 1000);
+                                    area.setBounds(60, 60, 1000, 1000);
 
-                                        f.add(area);
-                                        f.setSize(1000, 1000);
-                                        f.setLayout(null);
-                                        f.setVisible(true);
-                                 }
-
+                                    f.add(area);
+                                    f.setSize(1000, 1000);
+                                    f.setLayout(null);
+                                    f.setVisible(true);
+                                }
 
                                 break;
                                 case 13:
+                                    try (BufferedReader br = new BufferedReader(new FileReader("teacher.csv"))) {
+                                        String line = br.readLine();
+
+                                        while (line != null) {
+
+                                            line = br.readLine();
+                                            System.out.println(line);
+                                        }
+
+                                    }
+
+                                break;
+                            case 14:
                                 System.out.println("exiting!!");
                                 TimeUnit.MICROSECONDS.sleep(2000000);
                                 break;
 
-                               default:
+                            default:
                                 System.out.println("INVALID OPTION!!");
                                 break;
                         }
 
-                    } while (choice_teacher != 13);
+                    } while (choice_teacher != 14);
                     break;
                 case 3:
                     int class_choice = 0;
@@ -1153,8 +1192,7 @@ public class main {
                                 } else
                                     System.out.println("Error!! your choice should be (S1-S2S-S2H-SV-SE-SG)");
                                 break;
-                                
-                                    
+
                             case 5:
                                 System.out.println("exiting");
                                 TimeUnit.MICROSECONDS.sleep(2000000);
@@ -1174,7 +1212,9 @@ public class main {
                                 + "5-get school classes\n"
                                 + "6- throw all information into an external file\n"
                                 + "7- throw all information into an external panel\n"
-                                + "8-exit\n");
+                                + "8- read all informatiom from an external file\n"
+                                  
+                                + "9-exit\n");
                         System.out.println("choose what to do");
                         school_choice = input.nextInt();
                         input.nextLine();
@@ -1200,25 +1240,38 @@ public class main {
                                 System.out.println("school's classes:\n");
                                 sc.getAllClasses();
                                 break;
-                                case 6:
+                            case 6:
                                 PrintWriter out = new PrintWriter("school.csv");
+                                out.println();
 
                                 out.println(sc.toString());
                                 out.close();
                                 break;
-                                case 7:
-                                 JFrame f = new JFrame();
+                            case 7:
+                                JFrame f = new JFrame();
 
-                                        JTextArea area = new JTextArea(sc.toString());
+                                JTextArea area = new JTextArea(sc.toString());
 
-                                        area.setBounds(60, 60, 1000, 1000);
+                                area.setBounds(60, 60, 1000, 1000);
 
-                                        f.add(area);
-                                        f.setSize(1000, 1000);
-                                        f.setLayout(null);
-                                        f.setVisible(true);
-                                        break;
-                            case 8:
+                                f.add(area);
+                                f.setSize(1000, 1000);
+                                f.setLayout(null);
+                                f.setVisible(true);
+                                break;
+                                case 8:
+                                    try (BufferedReader br = new BufferedReader(new FileReader("school.csv"))) {
+                                        String line = br.readLine();
+
+                                        while (line != null) {
+
+                                            line = br.readLine();
+                                            System.out.println(line);
+                                        }
+
+                                    }
+                                break;
+                            case 9:
                                 System.out.println("Exiting...");
                                 break;
 
@@ -1226,7 +1279,7 @@ public class main {
                                 System.out.println("error!!");
                         }
 
-                    } while (school_choice != 8);
+                    } while (school_choice != 9);
                     break;
                 case 5:
 
@@ -1273,6 +1326,6 @@ public class main {
             }
 
         } while (choice != 6);
-input.close();
+        input.close();
     }
 }
