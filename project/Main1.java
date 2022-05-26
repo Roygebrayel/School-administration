@@ -80,11 +80,15 @@ public class Main1 {
                                 do {
                                     System.out.println("Enter student age");
                                     age = input.nextInt();
+                                    if(age<13||age>23)
+                                    System.out.println("age should be >13 and <23");
                                 } while (age < 13 || age > 23);
                                 do {
                                     System.out.println("Enter the year of start");
                                     year = input.nextInt();
                                     input.nextLine();
+                                    if  (year< 2003 || year >2021)
+                                        System.out.println("year should be >2003 and <2022");
                                 } while (year < 2003 || year >= 2022);
                                 System.out.println("student in bus?(y/n)");
 
@@ -432,10 +436,14 @@ public class Main1 {
                                 do {
                                     System.out.println("Enter teacher age");
                                     age = input.nextInt();
+                                    if (age < 18 || age > 64)
+                                        System.out.println("age should be >18 and <64");
                                 } while (age < 18 || age > 64);
                                 do {
                                     System.out.println("Enter the year of start");
                                     year = input.nextInt();
+                                    if( year < 18 || year> 64)
+                                        System.out.println("year should be >18 and <64");
                                 } while (year < 2000 || year > 2021);
                                 input.nextLine();
                                 int hours;
