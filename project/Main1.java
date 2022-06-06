@@ -24,7 +24,7 @@ public class Main1 {
         String firstName, lastName, stInBus;
         Student[] st = new Student[100];
         Teacher[] t = new Teacher[100];
-        Class c1[] = new Class[100];
+        
         School sc = new School();
         int admps = 0000;
 

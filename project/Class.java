@@ -3,7 +3,7 @@ package project;
 
 import java.util.Scanner;
 
-import java.util.Scanner;
+
 public class Class {
 	Scanner input=new Scanner(System.in);
 	private String[] levelchoose= {"S1G","S2S","S2H","SV","SG","SE","LH"};

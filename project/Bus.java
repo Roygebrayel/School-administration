@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Bus {
 	private Student [] all_Students;
-	private String inbus;
+	
 	private int nbOfStudent=0;
 Scanner input=new Scanner(System.in);
 	Bus(){
