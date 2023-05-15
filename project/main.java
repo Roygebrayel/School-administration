@@ -13,7 +13,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 
-public class Main1 {
+public class main {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -442,8 +442,8 @@ public class Main1 {
                                 do {
                                     System.out.println("Enter the year of start");
                                     year = input.nextInt();
-                                    if( year < 18 || year> 64)
-                                        System.out.println("year should be >18 and <64");
+                                    if( year < 2000 || year> 2021)
+                                        System.out.println("year should be >2000 and <2021");
                                 } while (year < 2000 || year > 2021);
                                 input.nextLine();
                                 int hours;
